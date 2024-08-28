@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://b1ki65b81yhgj"]
+
+[ext_resource type="FontFile" uid="uid://dix4rsija375" path="res://fonts/JetBrainsMono.ttf" id="1_8ldvd"]
+
+[resource]
+base_font = ExtResource("1_8ldvd")
+variation_opentype = {
+2003265652: 600
+}

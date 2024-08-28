@@ -1,0 +1,584 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3bqj114hvrfx"]
+
+[ext_resource type="Script" path="res://scripts/asset_manager.gd" id="1_l53bx"]
+[ext_resource type="Script" path="res://scripts/button_preview_manager.gd" id="2_xbdsd"]
+
+[node name="Main" type="Node2D"]
+
+[node name="AssetManager" type="Node" parent="." node_paths=PackedStringArray("json_file_dialog", "image_file_dialog", "button_preview")]
+script = ExtResource("1_l53bx")
+json_file_dialog = NodePath("JsonFileDialog")
+image_file_dialog = NodePath("ImageFileDialog")
+button_preview = NodePath("../Button")
+
+[node name="JsonFileDialog" type="FileDialog" parent="AssetManager"]
+title = "Open a File"
+size = Vector2i(303, 180)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json")
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="ImageFileDialog" type="FileDialog" parent="AssetManager"]
+auto_translate_mode = 1
+title = "Open a File"
+size = Vector2i(303, 180)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png")
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Button" type="Node2D" parent="." node_paths=PackedStringArray("default_background", "default_left_anim", "default_right_anim", "hover_background", "hover_left_anim", "hover_right_anim")]
+script = ExtResource("2_xbdsd")
+default_background = NodePath("Default/Background")
+default_left_anim = NodePath("Default/Left")
+default_right_anim = NodePath("Default/Right")
+hover_background = NodePath("Hover/Background")
+hover_left_anim = NodePath("Hover/Left")
+hover_right_anim = NodePath("Hover/Right")
+
+[node name="Default" type="Node2D" parent="Button"]
+
+[node name="Background" type="AnimatedSprite2D" parent="Button/Default"]
+
+[node name="Left" type="AnimatedSprite2D" parent="Button/Default"]
+
+[node name="Right" type="AnimatedSprite2D" parent="Button/Default"]
+
+[node name="Hover" type="Node2D" parent="Button"]
+visible = false
+
+[node name="Background" type="AnimatedSprite2D" parent="Button/Hover"]
+
+[node name="Left" type="AnimatedSprite2D" parent="Button/Hover"]
+
+[node name="Right" type="AnimatedSprite2D" parent="Button/Hover"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Assets" type="PanelContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(250, 0)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Assets"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Assets/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.497474, 0.497474, 0.497474, 1)
+theme_override_font_sizes/font_size = 10
+text = "Assets"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Importing"
+horizontal_alignment = 1
+
+[node name="ImportBackground" type="Button" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Import Background"
+
+[node name="ImportLeftAnim" type="Button" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Import Left Anim"
+
+[node name="ImportRightAnim" type="Button" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Import Right Anim"
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle2" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Imported"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tab_alignment = 1
+current_tab = 0
+clip_tabs = false
+
+[node name="Bkgs" type="MarginContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+metadata/_tab_index = 0
+
+[node name="NoImported" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Bkgs"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+theme_override_font_sizes/font_size = 12
+text = "No Imported Backgrounds :("
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Bkgs"]
+layout_mode = 2
+columns = 2
+
+[node name="Left Anims" type="MarginContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_top = 5
+metadata/_tab_index = 1
+
+[node name="NoImported" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Left Anims"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+theme_override_font_sizes/font_size = 12
+text = "No Imported Left Anims :("
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Left Anims"]
+layout_mode = 2
+columns = 2
+
+[node name="Right Anims" type="MarginContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_top = 5
+metadata/_tab_index = 2
+
+[node name="NoImported" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Right Anims"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+theme_override_font_sizes/font_size = 12
+text = "No Imported Right Anims :("
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Right Anims"]
+layout_mode = 2
+columns = 2
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle3" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Currently Applied Assets"
+horizontal_alignment = 1
+
+[node name="DefaultBackgroundAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultBackgroundAsset"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Background Default:"
+vertical_alignment = 1
+
+[node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultBackgroundAsset"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "none"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="DefaultLeftAnimAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultLeftAnimAsset"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Left Anim Default:"
+vertical_alignment = 1
+
+[node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultLeftAnimAsset"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "none"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="DefaultRightAnimAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultRightAnimAsset"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Right Anim Default:"
+vertical_alignment = 1
+
+[node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultRightAnimAsset"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "none"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="HoverBackgroundAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverBackgroundAsset"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Background Hover:"
+vertical_alignment = 1
+
+[node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverBackgroundAsset"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "none"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="HoverLeftAnimAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverLeftAnimAsset"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Left Anim Hover:"
+vertical_alignment = 1
+
+[node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverLeftAnimAsset"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "none"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="HoverRightAnimAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverRightAnimAsset"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Right Anim Hover:"
+vertical_alignment = 1
+
+[node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverRightAnimAsset"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "none"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Color" type="PanelContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(250, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -252.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 120.0
+grow_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Color"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Color/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.497474, 0.497474, 0.497474, 1)
+theme_override_font_sizes/font_size = 10
+text = "Color
+"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Default"
+horizontal_alignment = 1
+
+[node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultTextColor"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Text"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultTextColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultTextColor"]
+custom_minimum_size = Vector2(150, 21)
+layout_mode = 2
+size_flags_horizontal = 8
+edit_alpha = false
+
+[node name="DefaultBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultBorderColor"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Border"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultBorderColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultBorderColor"]
+custom_minimum_size = Vector2(150, 21)
+layout_mode = 2
+size_flags_horizontal = 8
+edit_alpha = false
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle2" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Hover"
+horizontal_alignment = 1
+
+[node name="HoverTextColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverTextColor"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Text"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverTextColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverTextColor"]
+custom_minimum_size = Vector2(150, 21)
+layout_mode = 2
+size_flags_horizontal = 8
+edit_alpha = false
+
+[node name="HoverBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Border"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor"]
+custom_minimum_size = Vector2(150, 21)
+layout_mode = 2
+size_flags_horizontal = 8
+edit_alpha = false
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle3" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Pressed"
+horizontal_alignment = 1
+
+[node name="PressedTextColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Text"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor"]
+custom_minimum_size = Vector2(150, 21)
+layout_mode = 2
+size_flags_horizontal = 8
+edit_alpha = false
+
+[node name="PressedBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Border"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor"]
+custom_minimum_size = Vector2(150, 21)
+layout_mode = 2
+size_flags_horizontal = 8
+edit_alpha = false
+
+[node name="Debug" type="PanelContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(250, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -84.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Debug"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Debug/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.497474, 0.497474, 0.497474, 1)
+theme_override_font_sizes/font_size = 10
+text = "Debug"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle" type="Label" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Button States"
+horizontal_alignment = 1
+
+[node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer/DefaultTextColor"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Main"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer/DefaultTextColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer/DefaultTextColor"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Default"
+popup/item_1/text = "Hover"
+popup/item_1/id = 1
+popup/item_2/text = "Pressed"
+popup/item_2/id = 2
+
+[connection signal="canceled" from="AssetManager/JsonFileDialog" to="AssetManager" method="import_cancelled"]
+[connection signal="file_selected" from="AssetManager/JsonFileDialog" to="AssetManager" method="_on_file_selected"]
+[connection signal="file_selected" from="AssetManager/JsonFileDialog" to="AssetManager" method="_on_json_file_dialog_file_selected"]
+[connection signal="canceled" from="AssetManager/ImageFileDialog" to="AssetManager" method="import_cancelled"]
+[connection signal="file_selected" from="AssetManager/ImageFileDialog" to="AssetManager" method="_on_file_selected"]
+[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportBackground" to="AssetManager" method="_on_import_background_pressed"]
+[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportLeftAnim" to="AssetManager" method="_on_import_left_anim_pressed"]
+[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportRightAnim" to="AssetManager" method="_on_import_right_anim_pressed"]
