@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clsekxp7jjsqy"
-path="res://.godot/imported/Right_Hover.png-b4d2a71111791820a998f2b626778ddd.ctex"
+uid="uid://ca5q7lewknjac"
+path="res://.godot/imported/BG_Default.png-c078156e60f3c825770744f32510a27f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_sprites/Right_Hover.png"
-dest_files=["res://.godot/imported/Right_Hover.png-b4d2a71111791820a998f2b626778ddd.ctex"]
+source_file="res://sprites/BG_Default.png"
+dest_files=["res://.godot/imported/BG_Default.png-c078156e60f3c825770744f32510a27f.ctex"]
 
 [params]
 

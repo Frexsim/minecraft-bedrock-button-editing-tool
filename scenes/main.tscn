@@ -1,40 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3bqj114hvrfx"]
+[gd_scene load_steps=11 format=3 uid="uid://c3bqj114hvrfx"]
 
 [ext_resource type="Script" path="res://scripts/asset_manager.gd" id="1_l53bx"]
 [ext_resource type="Script" path="res://scripts/button_preview_manager.gd" id="2_xbdsd"]
+[ext_resource type="Script" path="res://scripts/rich_text_label_url_handler.gd" id="3_0bhrm"]
+[ext_resource type="Texture2D" uid="uid://ds0fl8g7jwsgr" path="res://sprites/border.png" id="3_1vyi2"]
+[ext_resource type="Script" path="res://scripts/about_menu.gd" id="3_gd61j"]
+[ext_resource type="Script" path="res://scripts/assets_menu.gd" id="3_ushq5"]
+[ext_resource type="Texture2D" uid="uid://baarxybbc5rdv" path="res://sprites/mc_default_text.png" id="3_xlalc"]
+[ext_resource type="Texture2D" uid="uid://ddvk4fkfsq7rc" path="res://sprites/mc_education_text.png" id="4_0kfe5"]
+[ext_resource type="Script" path="res://scripts/version_label.gd" id="4_junoj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r224d"]
+size = Vector2(292, 56)
 
 [node name="Main" type="Node2D"]
 
-[node name="AssetManager" type="Node" parent="." node_paths=PackedStringArray("json_file_dialog", "image_file_dialog", "button_preview")]
+[node name="AssetManager" type="Node" parent="." node_paths=PackedStringArray("import_file_dialog", "button_preview")]
 script = ExtResource("1_l53bx")
-json_file_dialog = NodePath("JsonFileDialog")
-image_file_dialog = NodePath("ImageFileDialog")
-button_preview = NodePath("../Button")
+import_file_dialog = NodePath("ImportFileDialog")
+button_preview = NodePath("../ButtonPreviewManager")
 
-[node name="JsonFileDialog" type="FileDialog" parent="AssetManager"]
-title = "Open a File"
+[node name="ImportFileDialog" type="FileDialog" parent="AssetManager"]
+title = "Open File(s)"
 size = Vector2i(303, 180)
 ok_button_text = "Open"
-file_mode = 0
+file_mode = 1
 access = 2
 filters = PackedStringArray("*.json")
 show_hidden_files = true
 use_native_dialog = true
 
-[node name="ImageFileDialog" type="FileDialog" parent="AssetManager"]
-auto_translate_mode = 1
-title = "Open a File"
-size = Vector2i(303, 180)
-ok_button_text = "Open"
-file_mode = 0
-access = 2
-filters = PackedStringArray("*.png")
-show_hidden_files = true
-use_native_dialog = true
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Button" type="Node2D" parent="." node_paths=PackedStringArray("default_background", "default_left_anim", "default_right_anim", "hover_background", "hover_left_anim", "hover_right_anim")]
+[node name="ButtonPreviewManager" type="Node2D" parent="." node_paths=PackedStringArray("default_background", "default_left_anim", "default_right_anim", "hover_background", "hover_left_anim", "hover_right_anim")]
 script = ExtResource("2_xbdsd")
 default_background = NodePath("Default/Background")
 default_left_anim = NodePath("Default/Left")
@@ -43,31 +41,62 @@ hover_background = NodePath("Hover/Background")
 hover_left_anim = NodePath("Hover/Left")
 hover_right_anim = NodePath("Hover/Right")
 
-[node name="Default" type="Node2D" parent="Button"]
+[node name="Border" type="Sprite2D" parent="ButtonPreviewManager"]
+texture = ExtResource("3_1vyi2")
 
-[node name="Background" type="AnimatedSprite2D" parent="Button/Default"]
+[node name="Default" type="Node2D" parent="ButtonPreviewManager"]
 
-[node name="Left" type="AnimatedSprite2D" parent="Button/Default"]
+[node name="Background" type="AnimatedSprite2D" parent="ButtonPreviewManager/Default"]
 
-[node name="Right" type="AnimatedSprite2D" parent="Button/Default"]
+[node name="Left" type="AnimatedSprite2D" parent="ButtonPreviewManager/Default"]
 
-[node name="Hover" type="Node2D" parent="Button"]
+[node name="Right" type="AnimatedSprite2D" parent="ButtonPreviewManager/Default"]
+
+[node name="Hover" type="Node2D" parent="ButtonPreviewManager"]
 visible = false
 
-[node name="Background" type="AnimatedSprite2D" parent="Button/Hover"]
+[node name="Background" type="AnimatedSprite2D" parent="ButtonPreviewManager/Hover"]
 
-[node name="Left" type="AnimatedSprite2D" parent="Button/Hover"]
+[node name="Left" type="AnimatedSprite2D" parent="ButtonPreviewManager/Hover"]
 
-[node name="Right" type="AnimatedSprite2D" parent="Button/Hover"]
+[node name="Right" type="AnimatedSprite2D" parent="ButtonPreviewManager/Hover"]
+
+[node name="DefaultText" type="Sprite2D" parent="ButtonPreviewManager"]
+texture = ExtResource("3_xlalc")
+
+[node name="EducationText" type="Sprite2D" parent="ButtonPreviewManager"]
+visible = false
+texture = ExtResource("4_0kfe5")
+
+[node name="Hitbox" type="Area2D" parent="ButtonPreviewManager"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonPreviewManager/Hitbox"]
+position = Vector2(3.8147e-06, 0)
+shape = SubResource("RectangleShape2D_r224d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Assets" type="PanelContainer" parent="CanvasLayer"]
+[node name="Assets" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("asset_manager", "button_preview_manager", "imported_backgrounds_grid", "imported_left_anims_grid", "imported_right_anims_grid", "no_imported_backgrounds", "no_imported_left_anims", "no_imported_right_anims", "default_background_asset_label", "default_left_anim_asset_label", "default_right_anim_asset_label", "hover_background_asset_label", "hover_left_anim_asset_label", "hover_right_anim_asset_label")]
 custom_minimum_size = Vector2(250, 0)
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 50.0
+script = ExtResource("3_ushq5")
+asset_manager = NodePath("../../AssetManager")
+button_preview_manager = NodePath("../../ButtonPreviewManager")
+imported_backgrounds_grid = NodePath("MarginContainer/VBoxContainer/TabContainer/Bkgs/GridContainer")
+imported_left_anims_grid = NodePath("MarginContainer/VBoxContainer/TabContainer/Left Anims/GridContainer")
+imported_right_anims_grid = NodePath("MarginContainer/VBoxContainer/TabContainer/Right Anims/GridContainer")
+no_imported_backgrounds = NodePath("MarginContainer/VBoxContainer/TabContainer/Bkgs/NoImported")
+no_imported_left_anims = NodePath("MarginContainer/VBoxContainer/TabContainer/Left Anims/NoImported")
+no_imported_right_anims = NodePath("MarginContainer/VBoxContainer/TabContainer/Right Anims/NoImported")
+default_background_asset_label = NodePath("MarginContainer/VBoxContainer/DefaultBackgroundAsset/AssetName")
+default_left_anim_asset_label = NodePath("MarginContainer/VBoxContainer/DefaultLeftAnimAsset/AssetName")
+default_right_anim_asset_label = NodePath("MarginContainer/VBoxContainer/DefaultRightAnimAsset/AssetName")
+hover_background_asset_label = NodePath("MarginContainer/VBoxContainer/HoverBackgroundAsset/AssetName")
+hover_left_anim_asset_label = NodePath("MarginContainer/VBoxContainer/HoverLeftAnimAsset/AssetName")
+hover_right_anim_asset_label = NodePath("MarginContainer/VBoxContainer/HoverRightAnimAsset/AssetName")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Assets"]
 layout_mode = 2
@@ -94,20 +123,20 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
-text = "Importing"
+text = "Import"
 horizontal_alignment = 1
 
 [node name="ImportBackground" type="Button" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Import Background"
+text = "Import Background(s)"
 
 [node name="ImportLeftAnim" type="Button" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Import Left Anim"
+text = "Import Left Anim(s)"
 
 [node name="ImportRightAnim" type="Button" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Import Right Anim"
+text = "Import Right Anim(s)"
 
 [node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -140,6 +169,7 @@ vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Bkgs"]
 layout_mode = 2
+size_flags_horizontal = 4
 columns = 2
 
 [node name="Left Anims" type="MarginContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer"]
@@ -158,6 +188,7 @@ vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Left Anims"]
 layout_mode = 2
+size_flags_horizontal = 4
 columns = 2
 
 [node name="Right Anims" type="MarginContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer"]
@@ -176,6 +207,7 @@ vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/TabContainer/Right Anims"]
 layout_mode = 2
+size_flags_horizontal = 4
 columns = 2
 
 [node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
@@ -185,7 +217,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
-text = "Currently Applied Assets"
+text = "Currently Applied"
 horizontal_alignment = 1
 
 [node name="DefaultBackgroundAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
@@ -365,7 +397,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Text"
+text = "Text:"
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultTextColor"]
@@ -376,6 +408,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
+color = Color(1, 1, 1, 1)
 edit_alpha = false
 
 [node name="DefaultBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -386,7 +419,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Border"
+text = "Border:"
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultBorderColor"]
@@ -397,6 +430,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
+color = Color(1, 1, 1, 1)
 edit_alpha = false
 
 [node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -417,7 +451,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Text"
+text = "Text:"
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverTextColor"]
@@ -428,6 +462,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
+color = Color(0.746094, 0.746094, 0.746094, 1)
 edit_alpha = false
 
 [node name="HoverBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -438,7 +473,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Border"
+text = "Border:"
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor"]
@@ -449,6 +484,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
+color = Color(0.746094, 0.746094, 0.746094, 1)
 edit_alpha = false
 
 [node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -469,7 +505,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Text"
+text = "Text:"
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor"]
@@ -480,6 +516,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
+color = Color(0.5, 0.5, 0.5, 1)
 edit_alpha = false
 
 [node name="PressedBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -490,7 +527,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Border"
+text = "Border:"
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor"]
@@ -501,9 +538,10 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
+color = Color(0.5, 0.5, 0.5, 1)
 edit_alpha = false
 
-[node name="Debug" type="PanelContainer" parent="CanvasLayer"]
+[node name="Config" type="PanelContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(250, 0)
 anchors_preset = 3
 anchor_left = 1.0
@@ -518,7 +556,7 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_vertical = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Debug"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Config"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 5
@@ -526,59 +564,194 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Debug/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Config/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Title" type="Label" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.497474, 0.497474, 0.497474, 1)
 theme_override_font_sizes/font_size = 10
-text = "Debug"
+text = "Config"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SubTitle" type="Label" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer"]
+[node name="SubTitle" type="Label" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
 text = "Button States"
 horizontal_alignment = 1
 
-[node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer"]
+[node name="Main" type="HBoxContainer" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer/DefaultTextColor"]
+[node name="Label" type="Label" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Main"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Main"
+text = "Main:"
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer/DefaultTextColor"]
+[node name="Spacer" type="Control" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Debug/MarginContainer/VBoxContainer/DefaultTextColor"]
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Main"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 selected = 0
-item_count = 3
-popup/item_0/text = "Default"
-popup/item_1/text = "Hover"
+item_count = 5
+popup/item_0/text = "Interactable"
+popup/item_0/id = 4
 popup/item_1/id = 1
-popup/item_2/text = "Pressed"
+popup/item_1/separator = true
+popup/item_2/text = "Default"
 popup/item_2/id = 2
+popup/item_3/text = "Hover"
+popup/item_3/id = 3
+popup/item_4/text = "Pressed"
+popup/item_4/id = 4
 
-[connection signal="canceled" from="AssetManager/JsonFileDialog" to="AssetManager" method="import_cancelled"]
-[connection signal="file_selected" from="AssetManager/JsonFileDialog" to="AssetManager" method="_on_file_selected"]
-[connection signal="file_selected" from="AssetManager/JsonFileDialog" to="AssetManager" method="_on_json_file_dialog_file_selected"]
-[connection signal="canceled" from="AssetManager/ImageFileDialog" to="AssetManager" method="import_cancelled"]
-[connection signal="file_selected" from="AssetManager/ImageFileDialog" to="AssetManager" method="_on_file_selected"]
-[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportBackground" to="AssetManager" method="_on_import_background_pressed"]
-[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportLeftAnim" to="AssetManager" method="_on_import_left_anim_pressed"]
-[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportRightAnim" to="AssetManager" method="_on_import_right_anim_pressed"]
+[node name="Type" type="HBoxContainer" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Type"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Type:"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Type"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Type"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Default"
+popup/item_1/text = "Education"
+popup/item_1/id = 1
+
+[node name="About" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -35.0
+offset_right = 125.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("3_gd61j")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/About"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/About/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="CanvasLayer/About/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.497474, 0.497474, 0.497474, 1)
+theme_override_font_sizes/font_size = 10
+text = "About"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/About/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle" type="Label" parent="CanvasLayer/About/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Minecraft Bedrock Button Editing Tool"
+horizontal_alignment = 1
+
+[node name="Version" type="HBoxContainer" parent="CanvasLayer/About/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/About/MarginContainer/VBoxContainer/Version"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Version:"
+vertical_alignment = 1
+
+[node name="Version" type="Label" parent="CanvasLayer/About/MarginContainer/VBoxContainer/Version"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "N/A"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3
+script = ExtResource("4_junoj")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/About/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.497474, 0.497474, 0.497474, 1)
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]Made by [color=005faf][url=https://github.com/Frexsim]iFrexsim[/url][/color] with [color=005faf][url=https://godotengine.org/]Godot v4.3[/url][/color][/center]"
+fit_content = true
+scroll_active = false
+script = ExtResource("3_0bhrm")
+
+[node name="CloseHelp" type="Label" parent="CanvasLayer/About/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.497474, 0.497474, 0.497474, 1)
+theme_override_font_sizes/font_size = 10
+text = "(Press F1 to close)"
+horizontal_alignment = 1
+
+[node name="MenuBar" type="MenuBar" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 21.0
+
+[node name="Project" type="PopupMenu" parent="CanvasLayer/MenuBar"]
+system_menu_id = 2
+prefer_native_menu = true
+item_count = 6
+item_0/text = "New"
+item_1/text = "Open"
+item_1/id = 1
+item_2/text = "Save"
+item_2/id = 2
+item_3/id = 3
+item_3/separator = true
+item_4/text = "Export"
+item_4/id = 4
+item_5/text = "Export As"
+item_5/id = 5
+
+[connection signal="asset_imported" from="AssetManager" to="CanvasLayer/Assets" method="_on_asset_imported"]
+[connection signal="canceled" from="AssetManager/ImportFileDialog" to="AssetManager" method="_on_import_cancelled"]
+[connection signal="files_selected" from="AssetManager/ImportFileDialog" to="AssetManager" method="_on_files_selected"]
+[connection signal="asset_changed" from="ButtonPreviewManager" to="CanvasLayer/Assets" method="_on_button_preview_asset_changed"]
+[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportBackground" to="CanvasLayer/Assets" method="_on_import_background_pressed"]
+[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportLeftAnim" to="CanvasLayer/Assets" method="_on_import_left_anim_pressed"]
+[connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportRightAnim" to="CanvasLayer/Assets" method="_on_import_right_anim_pressed"]

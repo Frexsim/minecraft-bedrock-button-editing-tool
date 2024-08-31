@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=28 format=3 uid="uid://jocm4lou0nyy"]
+[gd_resource type="Theme" load_steps=32 format=3 uid="uid://jocm4lou0nyy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06q8t"]
 content_margin_left = 4.0
@@ -90,6 +90,34 @@ content_margin_right = 4.0
 content_margin_bottom = 2.0
 bg_color = Color(0.11, 0.11, 0.11, 0.498039)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87syp"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.3795, 0.69, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7b3r"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.151276, 0.151276, 0.151276, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqotm"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.372549, 0.686275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62hmt"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.11, 0.11, 0.11, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uc5vq"]
 bg_color = Color(0.0605303, 0.0605304, 0.0605303, 1)
 border_width_left = 1
@@ -127,8 +155,6 @@ border_color = Color(0.122252, 0.122252, 0.122252, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_i3h0q"]
 color = Color(0.247059, 0.247059, 0.247059, 1)
-grow_begin = -20.0
-grow_end = -20.0
 thickness = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftt4x"]
@@ -206,8 +232,16 @@ LineEdit/font_sizes/font_size = 14
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_tdc0m")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_sfcno")
 LineEdit/styles/read_only = SubResource("StyleBoxFlat_mmljw")
+MenuBar/font_sizes/font_size = 12
+MenuBar/styles/disabled = SubResource("StyleBoxFlat_87syp")
+MenuBar/styles/hover = SubResource("StyleBoxFlat_m7b3r")
+MenuBar/styles/normal = SubResource("StyleBoxFlat_qqotm")
+MenuBar/styles/pressed = SubResource("StyleBoxFlat_62hmt")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_uc5vq")
+PopupMenu/colors/font_separator_color = Color(0.498039, 0.498039, 0.498039, 1)
+PopupMenu/font_sizes/font_separator_size = 12
 PopupMenu/font_sizes/font_size = 12
+PopupMenu/font_sizes/title_font_size = 12
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_37n55")
 PopupMenu/styles/labeled_separator_left = SubResource("StyleBoxLine_pbwpv")
 PopupMenu/styles/labeled_separator_right = SubResource("StyleBoxLine_qub8x")
