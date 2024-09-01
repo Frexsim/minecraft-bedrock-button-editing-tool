@@ -37,7 +37,7 @@ func reset_import():
 	state = ImporterState.READY
 	import_type = null
 	
-	print("Reset import, ready for next import!")
+	print("[AssetManager]: Reset import, ready for next import!")
 
 func _on_import_cancelled():
 	reset_import()
@@ -45,12 +45,12 @@ func _on_import_cancelled():
 func _on_files_selected(paths: PackedStringArray):
 	state = ImporterState.IMPORTING
 	
-	print("Importing " + str(paths.size()) + " file(s)...")
+	print("[AssetManager]: Importing " + str(paths.size()) + " file(s)...")
 	
 	for path in paths:
 		var sprite_sheet_json_file_path = path
 		
-		print("Importing \"" + sprite_sheet_json_file_path.get_basename() + "\"...")
+		print("[AssetManager]: Importing \"" + sprite_sheet_json_file_path.get_basename() + "\"...")
 		
 		var sprite_sheet_basename = path.get_file().get_basename()
 		var sprite_sheet_image_file_path = path.get_base_dir() + "/" + sprite_sheet_basename + ".png"
@@ -62,14 +62,14 @@ func _on_files_selected(paths: PackedStringArray):
 			elif import_type == AssetType.RIGHT_ANIM:
 				import_right_anim(sprite_sheet_json_file_path, sprite_sheet_image_file_path)
 			else:
-				print("Failed to import, import type was null.")
+				print("[AssetManager]: Failed to import, import type was null.")
 		else:
-			print("Failed to import, could not find matching image file.")
+			print("[AssetManager]: Failed to import, could not find matching image file.")
 	
 	reset_import()
 
 func import_background(sprite_sheet_json_path: String, sprite_image_path: String):
-	print("Importing as background...")
+	print("[AssetManager]: Importing as background...")
 	
 	var imported_background = Importer.import_aseprite_sprite_sheet(sprite_sheet_json_path, sprite_image_path)
 	var asset_info = {
@@ -81,10 +81,10 @@ func import_background(sprite_sheet_json_path: String, sprite_image_path: String
 	
 	button_preview.set_background(button_preview.current_preview_state, asset_info)
 	
-	print("Importing finished!")
+	print("[AssetManager]: Importing finished!")
 
 func import_left_anim(sprite_sheet_json_path: String, sprite_image_path: String):
-	print("Importing as left animation...")
+	print("[AssetManager]: Importing as left animation...")
 	
 	var imported_left_anim = Importer.import_aseprite_sprite_sheet(sprite_sheet_json_path, sprite_image_path)
 	var asset_info = {
@@ -96,10 +96,10 @@ func import_left_anim(sprite_sheet_json_path: String, sprite_image_path: String)
 	
 	button_preview.set_left_anim(button_preview.current_preview_state, asset_info)
 	
-	print("Importing finished!")
+	print("[AssetManager]: Importing finished!")
 
 func import_right_anim(sprite_sheet_json_path: String, sprite_image_path: String):
-	print("Importing as right animation...")
+	print("[AssetManager]: Importing as right animation...")
 	
 	var imported_right_anim = Importer.import_aseprite_sprite_sheet(sprite_sheet_json_path, sprite_image_path)
 	var asset_info = {
@@ -111,4 +111,4 @@ func import_right_anim(sprite_sheet_json_path: String, sprite_image_path: String
 	
 	button_preview.set_right_anim(button_preview.current_preview_state, asset_info)
 	
-	print("Importing finished!")
+	print("[AssetManager]: Importing finished!")

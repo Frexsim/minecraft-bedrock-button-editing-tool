@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3bqj114hvrfx"]
+[gd_scene load_steps=18 format=3 uid="uid://c3bqj114hvrfx"]
 
 [ext_resource type="Script" path="res://scripts/asset_manager.gd" id="1_l53bx"]
 [ext_resource type="Script" path="res://scripts/button_preview_manager.gd" id="2_xbdsd"]
@@ -8,12 +8,25 @@
 [ext_resource type="Script" path="res://scripts/assets_menu.gd" id="3_ushq5"]
 [ext_resource type="Texture2D" uid="uid://baarxybbc5rdv" path="res://sprites/mc_default_text.png" id="3_xlalc"]
 [ext_resource type="Texture2D" uid="uid://ddvk4fkfsq7rc" path="res://sprites/mc_education_text.png" id="4_0kfe5"]
+[ext_resource type="Material" uid="uid://cuamgjgefe7r6" path="res://materials/outline.tres" id="4_2yfjp"]
 [ext_resource type="Script" path="res://scripts/version_label.gd" id="4_junoj"]
 [ext_resource type="Script" path="res://scripts/color_menu.gd" id="7_e75wh"]
 [ext_resource type="Script" path="res://scripts/config_menu.gd" id="8_cjpk0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r224d"]
 size = Vector2(292, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qray"]
+size = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7kpkx"]
+size = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8n6p"]
+size = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ewd5"]
+size = Vector2(0, 0)
 
 [node name="Main" type="Node2D"]
 
@@ -34,58 +47,104 @@ use_native_dialog = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="ButtonPreviewManager" type="Node2D" parent="." node_paths=PackedStringArray("default_sprites_parent", "default_background", "default_left_anim", "default_right_anim", "hover_sprites_parent", "hover_background", "hover_left_anim", "hover_right_anim", "default_text", "education_text", "border", "button_hitbox")]
+[node name="ButtonPreviewManager" type="Node2D" parent="." node_paths=PackedStringArray("default_sprites_parent", "default_background", "default_left_anim", "default_left_area", "default_left_collider", "default_right_anim", "default_right_area", "default_right_collider", "hover_sprites_parent", "hover_background", "hover_left_anim", "hover_left_area", "hover_left_collider", "hover_right_anim", "hover_right_area", "hover_right_collider", "default_text", "education_text", "border", "button_hitbox")]
 script = ExtResource("2_xbdsd")
 default_sprites_parent = NodePath("Default")
 default_background = NodePath("Default/Background")
 default_left_anim = NodePath("Default/Left")
+default_left_area = NodePath("Default/Left/Hitbox")
+default_left_collider = NodePath("Default/Left/Hitbox/CollisionShape2D")
 default_right_anim = NodePath("Default/Right")
+default_right_area = NodePath("Default/Right/Hitbox")
+default_right_collider = NodePath("Default/Right/Hitbox/CollisionShape2D")
 hover_sprites_parent = NodePath("Hover")
 hover_background = NodePath("Hover/Background")
 hover_left_anim = NodePath("Hover/Left")
+hover_left_area = NodePath("Hover/Left/Hitbox")
+hover_left_collider = NodePath("Hover/Left/Hitbox/CollisionShape2D")
 hover_right_anim = NodePath("Hover/Right")
+hover_right_area = NodePath("Hover/Right/Hitbox")
+hover_right_collider = NodePath("Hover/Right/Hitbox/CollisionShape2D")
 default_text = NodePath("DefaultText")
 education_text = NodePath("EducationText")
 border = NodePath("Border")
-button_hitbox = NodePath("Hitbox")
+button_hitbox = NodePath("Border/Hitbox")
+outline_material = ExtResource("4_2yfjp")
 
 [node name="Border" type="Sprite2D" parent="ButtonPreviewManager"]
+texture_filter = 1
 texture = ExtResource("3_1vyi2")
+
+[node name="Hitbox" type="Area2D" parent="ButtonPreviewManager/Border"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonPreviewManager/Border/Hitbox"]
+position = Vector2(3.8147e-06, 0)
+shape = SubResource("RectangleShape2D_r224d")
 
 [node name="Default" type="Node2D" parent="ButtonPreviewManager"]
 
 [node name="Background" type="AnimatedSprite2D" parent="ButtonPreviewManager/Default"]
+texture_filter = 1
 
 [node name="Left" type="AnimatedSprite2D" parent="ButtonPreviewManager/Default"]
+texture_filter = 1
+
+[node name="Hitbox" type="Area2D" parent="ButtonPreviewManager/Default/Left"]
+priority = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonPreviewManager/Default/Left/Hitbox"]
+position = Vector2(3.8147e-06, 0)
+shape = SubResource("RectangleShape2D_6qray")
 
 [node name="Right" type="AnimatedSprite2D" parent="ButtonPreviewManager/Default"]
+texture_filter = 1
+
+[node name="Hitbox" type="Area2D" parent="ButtonPreviewManager/Default/Right"]
+priority = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonPreviewManager/Default/Right/Hitbox"]
+position = Vector2(3.8147e-06, 0)
+shape = SubResource("RectangleShape2D_7kpkx")
 
 [node name="Hover" type="Node2D" parent="ButtonPreviewManager"]
 visible = false
 
 [node name="Background" type="AnimatedSprite2D" parent="ButtonPreviewManager/Hover"]
+texture_filter = 1
 
 [node name="Left" type="AnimatedSprite2D" parent="ButtonPreviewManager/Hover"]
+texture_filter = 1
+
+[node name="Hitbox" type="Area2D" parent="ButtonPreviewManager/Hover/Left"]
+priority = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonPreviewManager/Hover/Left/Hitbox"]
+position = Vector2(3.8147e-06, 0)
+shape = SubResource("RectangleShape2D_g8n6p")
 
 [node name="Right" type="AnimatedSprite2D" parent="ButtonPreviewManager/Hover"]
+texture_filter = 1
+
+[node name="Hitbox" type="Area2D" parent="ButtonPreviewManager/Hover/Right"]
+priority = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonPreviewManager/Hover/Right/Hitbox"]
+position = Vector2(3.8147e-06, 0)
+shape = SubResource("RectangleShape2D_6ewd5")
 
 [node name="DefaultText" type="Sprite2D" parent="ButtonPreviewManager"]
+texture_filter = 1
 texture = ExtResource("3_xlalc")
 
 [node name="EducationText" type="Sprite2D" parent="ButtonPreviewManager"]
 visible = false
+texture_filter = 1
 texture = ExtResource("4_0kfe5")
-
-[node name="Hitbox" type="Area2D" parent="ButtonPreviewManager"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonPreviewManager/Hitbox"]
-position = Vector2(3.8147e-06, 0)
-shape = SubResource("RectangleShape2D_r224d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Assets" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("asset_manager", "button_preview_manager", "imported_backgrounds_grid", "imported_left_anims_grid", "imported_right_anims_grid", "no_imported_backgrounds", "no_imported_left_anims", "no_imported_right_anims", "default_background_asset_label", "default_left_anim_asset_label", "default_right_anim_asset_label", "hover_background_asset_label", "hover_left_anim_asset_label", "hover_right_anim_asset_label")]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(350, 0)
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
@@ -355,7 +414,7 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="Color" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "default_text_color_picker_button", "default_border_color_picker_button", "hover_text_color_picker_button", "hover_border_color_picker_button", "pressed_text_color_picker_button", "pressed_border_color_picker_button")]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(350, 0)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -421,7 +480,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultTextColor"]
-custom_minimum_size = Vector2(150, 21)
+custom_minimum_size = Vector2(250, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(1, 0, 0, 1)
@@ -443,7 +502,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultBorderColor"]
-custom_minimum_size = Vector2(150, 21)
+custom_minimum_size = Vector2(250, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0.5, 0, 0, 1)
@@ -475,7 +534,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverTextColor"]
-custom_minimum_size = Vector2(150, 21)
+custom_minimum_size = Vector2(250, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0.0078125, 1, 0, 1)
@@ -497,7 +556,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor"]
-custom_minimum_size = Vector2(150, 21)
+custom_minimum_size = Vector2(250, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0, 0.5, 0, 1)
@@ -529,7 +588,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor"]
-custom_minimum_size = Vector2(150, 21)
+custom_minimum_size = Vector2(250, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0.0078125, 0, 1, 1)
@@ -551,14 +610,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor"]
-custom_minimum_size = Vector2(150, 21)
+custom_minimum_size = Vector2(250, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0, 0, 0.5, 1)
 edit_alpha = false
 
-[node name="Config" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "main_state_option", "preview_type_option")]
-custom_minimum_size = Vector2(250, 0)
+[node name="Display" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "main_state_option", "preview_type_option")]
+custom_minimum_size = Vector2(350, 0)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -576,7 +635,7 @@ button_preview_manager = NodePath("../../ButtonPreviewManager")
 main_state_option = NodePath("MarginContainer/VBoxContainer/Main/OptionButton")
 preview_type_option = NodePath("MarginContainer/VBoxContainer/Type/OptionButton")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Config"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Display"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 5
@@ -584,45 +643,45 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Config/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Display/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Title" type="Label" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.497474, 0.497474, 0.497474, 1)
 theme_override_font_sizes/font_size = 10
-text = "Config"
+text = "Display"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SubTitle" type="Label" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
+[node name="SubTitle" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
 text = "Button States"
 horizontal_alignment = 1
 
-[node name="Main" type="HBoxContainer" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
+[node name="Main" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Main"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Main"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Main:"
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Main"]
+[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Main"]
-custom_minimum_size = Vector2(150, 0)
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Main"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 selected = 0
 item_count = 5
@@ -636,23 +695,23 @@ popup/item_3/id = 3
 popup/item_4/text = "Pressed"
 popup/item_4/id = 4
 
-[node name="Type" type="HBoxContainer" parent="CanvasLayer/Config/MarginContainer/VBoxContainer"]
+[node name="Type" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Type"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Type"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Type:"
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Type"]
+[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Type"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Config/MarginContainer/VBoxContainer/Type"]
-custom_minimum_size = Vector2(150, 0)
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Type"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -781,5 +840,5 @@ item_5/id = 5
 [connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_hover_border_color_changed"]
 [connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_pressed_text_color_changed"]
 [connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_pressed_border_color_changed"]
-[connection signal="item_selected" from="CanvasLayer/Config/MarginContainer/VBoxContainer/Main/OptionButton" to="CanvasLayer/Config" method="_on_main_state_changed"]
-[connection signal="item_selected" from="CanvasLayer/Config/MarginContainer/VBoxContainer/Type/OptionButton" to="CanvasLayer/Config" method="_on_preview_type_changed"]
+[connection signal="item_selected" from="CanvasLayer/Display/MarginContainer/VBoxContainer/Main/OptionButton" to="CanvasLayer/Display" method="_on_main_state_changed"]
+[connection signal="item_selected" from="CanvasLayer/Display/MarginContainer/VBoxContainer/Type/OptionButton" to="CanvasLayer/Display" method="_on_preview_type_changed"]
