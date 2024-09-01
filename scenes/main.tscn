@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3bqj114hvrfx"]
+[gd_scene load_steps=13 format=3 uid="uid://c3bqj114hvrfx"]
 
 [ext_resource type="Script" path="res://scripts/asset_manager.gd" id="1_l53bx"]
 [ext_resource type="Script" path="res://scripts/button_preview_manager.gd" id="2_xbdsd"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://baarxybbc5rdv" path="res://sprites/mc_default_text.png" id="3_xlalc"]
 [ext_resource type="Texture2D" uid="uid://ddvk4fkfsq7rc" path="res://sprites/mc_education_text.png" id="4_0kfe5"]
 [ext_resource type="Script" path="res://scripts/version_label.gd" id="4_junoj"]
+[ext_resource type="Script" path="res://scripts/color_menu.gd" id="7_e75wh"]
+[ext_resource type="Script" path="res://scripts/config_menu.gd" id="8_cjpk0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r224d"]
 size = Vector2(292, 56)
@@ -32,14 +34,20 @@ use_native_dialog = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="ButtonPreviewManager" type="Node2D" parent="." node_paths=PackedStringArray("default_background", "default_left_anim", "default_right_anim", "hover_background", "hover_left_anim", "hover_right_anim")]
+[node name="ButtonPreviewManager" type="Node2D" parent="." node_paths=PackedStringArray("default_sprites_parent", "default_background", "default_left_anim", "default_right_anim", "hover_sprites_parent", "hover_background", "hover_left_anim", "hover_right_anim", "default_text", "education_text", "border", "button_hitbox")]
 script = ExtResource("2_xbdsd")
+default_sprites_parent = NodePath("Default")
 default_background = NodePath("Default/Background")
 default_left_anim = NodePath("Default/Left")
 default_right_anim = NodePath("Default/Right")
+hover_sprites_parent = NodePath("Hover")
 hover_background = NodePath("Hover/Background")
 hover_left_anim = NodePath("Hover/Left")
 hover_right_anim = NodePath("Hover/Right")
+default_text = NodePath("DefaultText")
+education_text = NodePath("EducationText")
+border = NodePath("Border")
+button_hitbox = NodePath("Hitbox")
 
 [node name="Border" type="Sprite2D" parent="ButtonPreviewManager"]
 texture = ExtResource("3_1vyi2")
@@ -346,7 +354,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Color" type="PanelContainer" parent="CanvasLayer"]
+[node name="Color" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "default_text_color_picker_button", "default_border_color_picker_button", "hover_text_color_picker_button", "hover_border_color_picker_button", "pressed_text_color_picker_button", "pressed_border_color_picker_button")]
 custom_minimum_size = Vector2(250, 0)
 anchors_preset = 1
 anchor_left = 1.0
@@ -357,6 +365,14 @@ offset_right = -10.0
 offset_bottom = 120.0
 grow_horizontal = 0
 size_flags_vertical = 0
+script = ExtResource("7_e75wh")
+button_preview_manager = NodePath("../../ButtonPreviewManager")
+default_text_color_picker_button = NodePath("MarginContainer/VBoxContainer/DefaultTextColor/ColorPickerButton")
+default_border_color_picker_button = NodePath("MarginContainer/VBoxContainer/DefaultBorderColor/ColorPickerButton")
+hover_text_color_picker_button = NodePath("MarginContainer/VBoxContainer/HoverTextColor/ColorPickerButton")
+hover_border_color_picker_button = NodePath("MarginContainer/VBoxContainer/HoverBorderColor/ColorPickerButton")
+pressed_text_color_picker_button = NodePath("MarginContainer/VBoxContainer/PressedTextColor/ColorPickerButton")
+pressed_border_color_picker_button = NodePath("MarginContainer/VBoxContainer/PressedBorderColor/ColorPickerButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Color"]
 layout_mode = 2
@@ -408,7 +424,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
-color = Color(1, 1, 1, 1)
+color = Color(1, 0, 0, 1)
 edit_alpha = false
 
 [node name="DefaultBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -430,7 +446,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
-color = Color(1, 1, 1, 1)
+color = Color(0.5, 0, 0, 1)
 edit_alpha = false
 
 [node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -462,7 +478,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
-color = Color(0.746094, 0.746094, 0.746094, 1)
+color = Color(0.0078125, 1, 0, 1)
 edit_alpha = false
 
 [node name="HoverBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -484,7 +500,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
-color = Color(0.746094, 0.746094, 0.746094, 1)
+color = Color(0, 0.5, 0, 1)
 edit_alpha = false
 
 [node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -516,7 +532,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
-color = Color(0.5, 0.5, 0.5, 1)
+color = Color(0.0078125, 0, 1, 1)
 edit_alpha = false
 
 [node name="PressedBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
@@ -538,10 +554,10 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(150, 21)
 layout_mode = 2
 size_flags_horizontal = 8
-color = Color(0.5, 0.5, 0.5, 1)
+color = Color(0, 0, 0.5, 1)
 edit_alpha = false
 
-[node name="Config" type="PanelContainer" parent="CanvasLayer"]
+[node name="Config" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "main_state_option", "preview_type_option")]
 custom_minimum_size = Vector2(250, 0)
 anchors_preset = 3
 anchor_left = 1.0
@@ -555,6 +571,10 @@ offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_vertical = 8
+script = ExtResource("8_cjpk0")
+button_preview_manager = NodePath("../../ButtonPreviewManager")
+main_state_option = NodePath("MarginContainer/VBoxContainer/Main/OptionButton")
+preview_type_option = NodePath("MarginContainer/VBoxContainer/Type/OptionButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Config"]
 layout_mode = 2
@@ -606,8 +626,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 selected = 0
 item_count = 5
-popup/item_0/text = "Interactable"
-popup/item_0/id = 4
+popup/item_0/text = "Auto/Interactable"
 popup/item_1/id = 1
 popup/item_1/separator = true
 popup/item_2/text = "Default"
@@ -729,6 +748,7 @@ text = "(Press F1 to close)"
 horizontal_alignment = 1
 
 [node name="MenuBar" type="MenuBar" parent="CanvasLayer"]
+visible = false
 offset_right = 40.0
 offset_bottom = 21.0
 
@@ -755,3 +775,11 @@ item_5/id = 5
 [connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportBackground" to="CanvasLayer/Assets" method="_on_import_background_pressed"]
 [connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportLeftAnim" to="CanvasLayer/Assets" method="_on_import_left_anim_pressed"]
 [connection signal="pressed" from="CanvasLayer/Assets/MarginContainer/VBoxContainer/ImportRightAnim" to="CanvasLayer/Assets" method="_on_import_right_anim_pressed"]
+[connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultTextColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_default_text_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultBorderColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_default_border_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverTextColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_hover_text_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_hover_border_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_pressed_text_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_pressed_border_color_changed"]
+[connection signal="item_selected" from="CanvasLayer/Config/MarginContainer/VBoxContainer/Main/OptionButton" to="CanvasLayer/Config" method="_on_main_state_changed"]
+[connection signal="item_selected" from="CanvasLayer/Config/MarginContainer/VBoxContainer/Type/OptionButton" to="CanvasLayer/Config" method="_on_preview_type_changed"]

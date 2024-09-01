@@ -37,7 +37,7 @@ func _on_import_right_anim_pressed():
 
 func _on_asset_imported(importing_type: AssetManager.AssetType, asset_info: Dictionary):
 	var asset_button = Button.new()
-	asset_button.custom_minimum_size = Vector2i(110, 50)
+	asset_button.custom_minimum_size = Vector2i(110, 70)
 	
 	asset_button.text = asset_info.filename
 	asset_button.icon = sprite_frames_to_animated_texture(asset_info.asset)
@@ -49,21 +49,21 @@ func _on_asset_imported(importing_type: AssetManager.AssetType, asset_info: Dict
 	
 	if importing_type == AssetManager.AssetType.BACKGROUND:
 		asset_button.pressed.connect(func():
-			button_preview_manager.set_background(ButtonPreviewManager.StateType.DEFAULT, asset_info)
+			button_preview_manager.set_background(button_preview_manager.current_preview_state, asset_info)
 		)
 		
 		no_imported_backgrounds.hide()
 		imported_backgrounds_grid.add_child(asset_button)
 	elif importing_type == AssetManager.AssetType.LEFT_ANIM:
 		asset_button.pressed.connect(func():
-			button_preview_manager.set_left_anim(ButtonPreviewManager.StateType.DEFAULT, asset_info)
+			button_preview_manager.set_left_anim(button_preview_manager.current_preview_state, asset_info)
 		)
 		
 		no_imported_left_anims.hide()
 		imported_left_anims_grid.add_child(asset_button)
 	elif importing_type == AssetManager.AssetType.RIGHT_ANIM:
 		asset_button.pressed.connect(func():
-			button_preview_manager.set_right_anim(ButtonPreviewManager.StateType.DEFAULT, asset_info)
+			button_preview_manager.set_right_anim(button_preview_manager.current_preview_state, asset_info)
 		)
 		
 		no_imported_right_anims.hide()

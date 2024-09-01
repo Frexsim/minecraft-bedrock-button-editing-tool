@@ -79,7 +79,7 @@ func import_background(sprite_sheet_json_path: String, sprite_image_path: String
 	imported_assets.backgrounds.push_front(asset_info)
 	asset_imported.emit(AssetType.BACKGROUND, asset_info)
 	
-	button_preview.set_background(button_preview.StateType.DEFAULT, asset_info)
+	button_preview.set_background(button_preview.current_preview_state, asset_info)
 	
 	print("Importing finished!")
 
@@ -94,7 +94,7 @@ func import_left_anim(sprite_sheet_json_path: String, sprite_image_path: String)
 	imported_assets.left_anims.push_front(asset_info)
 	asset_imported.emit(AssetType.LEFT_ANIM, asset_info)
 	
-	button_preview.set_left_anim(button_preview.StateType.DEFAULT, asset_info)
+	button_preview.set_left_anim(button_preview.current_preview_state, asset_info)
 	
 	print("Importing finished!")
 
@@ -109,6 +109,6 @@ func import_right_anim(sprite_sheet_json_path: String, sprite_image_path: String
 	imported_assets.right_anims.push_front(asset_info)
 	asset_imported.emit(AssetType.RIGHT_ANIM, asset_info)
 	
-	button_preview.set_right_anim(button_preview.StateType.DEFAULT, asset_info)
+	button_preview.set_right_anim(button_preview.current_preview_state, asset_info)
 	
 	print("Importing finished!")
