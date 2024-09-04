@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3bqj114hvrfx"]
+[gd_scene load_steps=20 format=3 uid="uid://c3bqj114hvrfx"]
 
 [ext_resource type="Script" path="res://scripts/asset_manager.gd" id="1_l53bx"]
 [ext_resource type="Script" path="res://scripts/button_preview_manager.gd" id="2_xbdsd"]
@@ -11,7 +11,9 @@
 [ext_resource type="Material" uid="uid://cuamgjgefe7r6" path="res://materials/outline.tres" id="4_2yfjp"]
 [ext_resource type="Script" path="res://scripts/version_label.gd" id="4_junoj"]
 [ext_resource type="Script" path="res://scripts/color_menu.gd" id="7_e75wh"]
-[ext_resource type="Script" path="res://scripts/config_menu.gd" id="8_cjpk0"]
+[ext_resource type="Script" path="res://scripts/display_menu.gd" id="8_cjpk0"]
+[ext_resource type="Texture2D" uid="uid://f3qtk5arnvdu" path="res://icons/warning.svg" id="10_ql7v5"]
+[ext_resource type="Script" path="res://scripts/better_check_box.gd" id="11_gibos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r224d"]
 size = Vector2(292, 56)
@@ -288,11 +290,14 @@ text = "Currently Applied"
 horizontal_alignment = 1
 
 [node name="DefaultBackgroundAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultBackgroundAsset"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Background Default:"
@@ -301,6 +306,7 @@ vertical_alignment = 1
 [node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultBackgroundAsset"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 5
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "none"
@@ -309,11 +315,14 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="DefaultLeftAnimAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultLeftAnimAsset"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Left Anim Default:"
@@ -322,6 +331,7 @@ vertical_alignment = 1
 [node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultLeftAnimAsset"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 5
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "none"
@@ -330,11 +340,14 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="DefaultRightAnimAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultRightAnimAsset"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Right Anim Default:"
@@ -343,6 +356,7 @@ vertical_alignment = 1
 [node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/DefaultRightAnimAsset"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 5
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "none"
@@ -351,11 +365,14 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="HoverBackgroundAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverBackgroundAsset"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Background Hover:"
@@ -364,6 +381,7 @@ vertical_alignment = 1
 [node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverBackgroundAsset"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 5
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "none"
@@ -372,11 +390,14 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="HoverLeftAnimAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverLeftAnimAsset"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Left Anim Hover:"
@@ -385,6 +406,7 @@ vertical_alignment = 1
 [node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverLeftAnimAsset"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 5
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "none"
@@ -393,11 +415,14 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="HoverRightAnimAsset" type="HBoxContainer" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverRightAnimAsset"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Right Anim Hover:"
@@ -406,6 +431,7 @@ vertical_alignment = 1
 [node name="AssetName" type="Label" parent="CanvasLayer/Assets/MarginContainer/VBoxContainer/HoverRightAnimAsset"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 5
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "none"
@@ -465,11 +491,14 @@ text = "Default"
 horizontal_alignment = 1
 
 [node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultTextColor"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Text:"
@@ -480,18 +509,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultTextColor"]
-custom_minimum_size = Vector2(250, 21)
+custom_minimum_size = Vector2(200, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(1, 0, 0, 1)
 edit_alpha = false
 
 [node name="DefaultBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultBorderColor"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Border:"
@@ -502,7 +534,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/DefaultBorderColor"]
-custom_minimum_size = Vector2(250, 21)
+custom_minimum_size = Vector2(200, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0.5, 0, 0, 1)
@@ -519,11 +551,14 @@ text = "Hover"
 horizontal_alignment = 1
 
 [node name="HoverTextColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverTextColor"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Text:"
@@ -534,18 +569,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverTextColor"]
-custom_minimum_size = Vector2(250, 21)
+custom_minimum_size = Vector2(200, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0.0078125, 1, 0, 1)
 edit_alpha = false
 
 [node name="HoverBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Border:"
@@ -556,7 +594,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor"]
-custom_minimum_size = Vector2(250, 21)
+custom_minimum_size = Vector2(200, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0, 0.5, 0, 1)
@@ -573,11 +611,14 @@ text = "Pressed"
 horizontal_alignment = 1
 
 [node name="PressedTextColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Text:"
@@ -588,18 +629,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor"]
-custom_minimum_size = Vector2(250, 21)
+custom_minimum_size = Vector2(200, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0.0078125, 0, 1, 1)
 edit_alpha = false
 
 [node name="PressedBorderColor" type="HBoxContainer" parent="CanvasLayer/Color/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor"]
 layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Border:"
@@ -610,13 +654,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor"]
-custom_minimum_size = Vector2(250, 21)
+custom_minimum_size = Vector2(200, 21)
 layout_mode = 2
 size_flags_horizontal = 8
 color = Color(0, 0, 0.5, 1)
 edit_alpha = false
 
-[node name="Display" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "main_state_option", "preview_type_option")]
+[node name="Display" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "main_state_option", "interactable_main_state_option_warning", "preview_type_option")]
 custom_minimum_size = Vector2(350, 0)
 anchors_preset = 3
 anchor_left = 1.0
@@ -632,7 +676,8 @@ grow_vertical = 0
 size_flags_vertical = 8
 script = ExtResource("8_cjpk0")
 button_preview_manager = NodePath("../../ButtonPreviewManager")
-main_state_option = NodePath("MarginContainer/VBoxContainer/Main/OptionButton")
+main_state_option = NodePath("MarginContainer/VBoxContainer/State/OptionButton")
+interactable_main_state_option_warning = NodePath("MarginContainer/VBoxContainer/Interactable/Warning")
 preview_type_option = NodePath("MarginContainer/VBoxContainer/Type/OptionButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Display"]
@@ -662,45 +707,87 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
-text = "Button States"
+text = "Button"
 horizontal_alignment = 1
 
-[node name="Main" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+[node name="State" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Main"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/State"]
 layout_mode = 2
+size_flags_vertical = 5
+tooltip_text = "The current interaction state of the button."
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Main:"
+text = "State:"
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Main"]
+[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/State"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Main"]
-custom_minimum_size = Vector2(250, 0)
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/State"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+icon_alignment = 2
 selected = 0
-item_count = 5
-popup/item_0/text = "Auto/Interactable"
-popup/item_1/id = 1
-popup/item_1/separator = true
-popup/item_2/text = "Default"
-popup/item_2/id = 2
-popup/item_3/text = "Hover"
-popup/item_3/id = 3
-popup/item_4/text = "Pressed"
-popup/item_4/id = 4
+item_count = 3
+popup/item_0/text = "Default"
+popup/item_0/id = 2
+popup/item_1/text = "Hover"
+popup/item_1/id = 3
+popup/item_2/text = "Pressed"
+popup/item_2/id = 4
+
+[node name="Interactable" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Warning" type="TextureRect" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Interactable"]
+visible = false
+self_modulate = Color(0.994568, 1, 0.304688, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Button anim/deco sprites are not draggable while Interactable
+State is enabled, turn it off to edit them."
+texture = ExtResource("10_ql7v5")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Interactable"]
+layout_mode = 2
+size_flags_vertical = 5
+tooltip_text = "Enables button interactivity to allow you to get a better feel how it will look in-game."
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Interactable:"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Interactable"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Interactable"]
+layout_mode = 2
+script = ExtResource("11_gibos")
+on_text = "On"
+off_text = "Off"
 
 [node name="Type" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Type"]
 layout_mode = 2
+size_flags_vertical = 5
+tooltip_text = "Switch between other texts from different editions of the game."
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Type:"
@@ -711,13 +798,298 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="OptionButton" type="OptionButton" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/Type"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+icon_alignment = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Default"
 popup/item_1/text = "Education"
 popup/item_1/id = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle2" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Left Anim"
+horizontal_alignment = 1
+
+[node name="LeftAnimDefaultPosition" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition"]
+layout_mode = 2
+size_flags_vertical = 5
+tooltip_text = "Switch between other texts from different editions of the game."
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Default Position:"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer/X"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_type_variation = &"SpinBoxLabel"
+theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
+text = "X"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer/X"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+suffix = "px"
+
+[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer/Y"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_type_variation = &"SpinBoxLabel"
+theme_override_colors/font_color = Color(0.506667, 1, 0.26, 1)
+text = "Y"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer/Y"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+suffix = "px"
+
+[node name="LeftAnimHoverPosition" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition"]
+layout_mode = 2
+size_flags_vertical = 5
+tooltip_text = "Switch between other texts from different editions of the game."
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Hover Position:"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer/X"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_type_variation = &"SpinBoxLabel"
+theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
+text = "X"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer/X"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+suffix = "px"
+
+[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer/Y"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_type_variation = &"SpinBoxLabel"
+theme_override_colors/font_color = Color(0.506667, 1, 0.26, 1)
+text = "Y"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer/Y"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+suffix = "px"
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubTitle3" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Right Anim"
+horizontal_alignment = 1
+
+[node name="RightAnimDefaultPosition" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition"]
+layout_mode = 2
+size_flags_vertical = 5
+tooltip_text = "Switch between other texts from different editions of the game."
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Default Position:"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer/X"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_type_variation = &"SpinBoxLabel"
+theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
+text = "X"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer/X"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+suffix = "px"
+
+[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer/Y"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_type_variation = &"SpinBoxLabel"
+theme_override_colors/font_color = Color(0.506667, 1, 0.26, 1)
+text = "Y"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer/Y"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+suffix = "px"
+
+[node name="RightAnimHoverPosition" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition"]
+layout_mode = 2
+size_flags_vertical = 5
+tooltip_text = "Switch between other texts from different editions of the game."
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Hover Position:"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer/X"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_type_variation = &"SpinBoxLabel"
+theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
+text = "X"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer/X"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+suffix = "px"
+
+[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer/Y"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_type_variation = &"SpinBoxLabel"
+theme_override_colors/font_color = Color(0.506667, 1, 0.26, 1)
+text = "Y"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer/Y"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+suffix = "px"
 
 [node name="About" type="PanelContainer" parent="CanvasLayer"]
 visible = false
@@ -840,5 +1212,6 @@ item_5/id = 5
 [connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/HoverBorderColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_hover_border_color_changed"]
 [connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedTextColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_pressed_text_color_changed"]
 [connection signal="color_changed" from="CanvasLayer/Color/MarginContainer/VBoxContainer/PressedBorderColor/ColorPickerButton" to="CanvasLayer/Color" method="_on_pressed_border_color_changed"]
-[connection signal="item_selected" from="CanvasLayer/Display/MarginContainer/VBoxContainer/Main/OptionButton" to="CanvasLayer/Display" method="_on_main_state_changed"]
+[connection signal="item_selected" from="CanvasLayer/Display/MarginContainer/VBoxContainer/State/OptionButton" to="CanvasLayer/Display" method="_on_main_state_changed"]
+[connection signal="toggled" from="CanvasLayer/Display/MarginContainer/VBoxContainer/Interactable/CheckBox" to="CanvasLayer/Display" method="_on_interactable_main_state_changed"]
 [connection signal="item_selected" from="CanvasLayer/Display/MarginContainer/VBoxContainer/Type/OptionButton" to="CanvasLayer/Display" method="_on_preview_type_changed"]

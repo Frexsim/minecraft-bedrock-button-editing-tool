@@ -2,6 +2,7 @@ extends Node
 class_name ButtonPreviewManager
 
 signal asset_changed(state: StateType, type: AssetManager.AssetType, asset_info: Dictionary)
+signal state_changed(state: StateType)
 
 @export_group("Button Components")
 @export_subgroup("Default")
@@ -50,6 +51,7 @@ var preview_colors = {
 		"border": Color(),
 	},
 }
+var anim_dragging_enabled = true
 var currently_hovered_anim = null
 var drag_sprite_start = null
 var drag_mouse_start = null
@@ -123,7 +125,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		drag_mouse_start = null
 
 func set_currently_hovered_anim(anim: AnimatedSprite2D):
-	if drag_sprite_start == null and anim.visible == true:
+	if drag_sprite_start == null and anim_dragging_enabled == true and anim.visible == true:
 		currently_hovered_anim = anim
 
 func unhover_anim(this_anim: AnimatedSprite2D):
@@ -145,6 +147,8 @@ func update_hovered_anim():
 func set_preview_state(state: StateType):
 	current_preview_state = state
 	
+	state_changed.emit(state)
+	
 	update_visible_sprites()
 	update_colors()
 	restart_anims()
@@ -157,6 +161,7 @@ func set_preview_state(state: StateType):
 func set_interactable_mode(is_enabled: bool):
 	set_preview_state(StateType.DEFAULT)
 	interactable_mode = is_enabled
+	anim_dragging_enabled = not is_enabled
 
 func set_preview_type(preview_type: PreviewType):
 	default_text.hide()
