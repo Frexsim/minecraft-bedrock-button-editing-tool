@@ -3,6 +3,12 @@ class_name ButtonPreviewManager
 
 signal asset_changed(state: StateType, type: AssetManager.AssetType, asset_info: Dictionary)
 signal state_changed(state: StateType)
+signal anim_position_changed(anim_side: AnimSide, state: AssetStateType, position: Vector2)
+
+enum StateType { DEFAULT, HOVER, PRESSED }
+enum AssetStateType { DEFAULT, HOVER }
+enum AnimSide { LEFT, RIGHT }
+enum PreviewType { DEFAULT, EDUCATION }
 
 @export_group("Button Components")
 @export_subgroup("Default")
@@ -31,9 +37,6 @@ signal state_changed(state: StateType)
 @export var button_hitbox: Area2D
 @export_group("Materials")
 @export var outline_material: Material
-
-enum StateType { DEFAULT, HOVER, PRESSED }
-enum PreviewType { DEFAULT, EDUCATION }
 
 var interactable_mode = false
 var current_preview_state = StateType.DEFAULT
@@ -114,6 +117,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if drag_sprite_start != null and currently_hovered_anim != null:
 		currently_hovered_anim.position = get_viewport().get_mouse_position() - drag_mouse_start + drag_sprite_start
+		
+		var side_and_state = get_side_and_state_from_anim_node(currently_hovered_anim)
+		anim_position_changed.emit(side_and_state.side, side_and_state.state, currently_hovered_anim.position)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("drag_press"):
@@ -124,9 +130,46 @@ func _unhandled_input(event: InputEvent) -> void:
 		drag_sprite_start = null
 		drag_mouse_start = null
 
+func get_side_and_state_from_anim_node(anim: AnimatedSprite2D) -> Dictionary:
+	var side = null
+	if anim.name == "Left":
+		side = AnimSide.LEFT
+	elif anim.name == "Right":
+		side = AnimSide.RIGHT
+	
+	var anim_parent = anim.get_parent()
+	var state = null
+	if anim_parent.name == "Default":
+		state = AssetStateType.DEFAULT
+	elif anim_parent.name == "Hover":
+		state = AssetStateType.HOVER
+	
+	return {
+		"side": side,
+		"state": state
+	}
+
+func get_anim_node_from_side_and_state(side: AnimSide, state: AssetStateType) -> AnimatedSprite2D:
+	if side == AnimSide.LEFT:
+		if state == AssetStateType.DEFAULT:
+			return default_left_anim
+		elif state == AssetStateType.HOVER:
+			return hover_left_anim
+	elif side == AnimSide.RIGHT:
+		if state == AssetStateType.DEFAULT:
+			return default_right_anim
+		elif state == AssetStateType.HOVER:
+			return hover_right_anim
+	
+	return null
+
 func set_currently_hovered_anim(anim: AnimatedSprite2D):
 	if drag_sprite_start == null and anim_dragging_enabled == true and anim.visible == true:
 		currently_hovered_anim = anim
+
+func set_anim_position(side: AnimSide, state: AssetStateType, new_position: Vector2):
+	get_anim_node_from_side_and_state(side, state).position = new_position
+	anim_position_changed.emit(side, state, new_position)
 
 func unhover_anim(this_anim: AnimatedSprite2D):
 	if drag_sprite_start == null:

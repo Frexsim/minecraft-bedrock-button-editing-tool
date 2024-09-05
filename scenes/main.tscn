@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c3bqj114hvrfx"]
+[gd_scene load_steps=21 format=3 uid="uid://c3bqj114hvrfx"]
 
 [ext_resource type="Script" path="res://scripts/asset_manager.gd" id="1_l53bx"]
 [ext_resource type="Script" path="res://scripts/button_preview_manager.gd" id="2_xbdsd"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/display_menu.gd" id="8_cjpk0"]
 [ext_resource type="Texture2D" uid="uid://f3qtk5arnvdu" path="res://icons/warning.svg" id="10_ql7v5"]
 [ext_resource type="Script" path="res://scripts/better_check_box.gd" id="11_gibos"]
+[ext_resource type="Script" path="res://scripts/vector2_spin_box_group.gd" id="12_ufcu2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r224d"]
 size = Vector2(292, 56)
@@ -660,7 +661,7 @@ size_flags_horizontal = 8
 color = Color(0, 0, 0.5, 1)
 edit_alpha = false
 
-[node name="Display" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "main_state_option", "interactable_main_state_option_warning", "preview_type_option")]
+[node name="Display" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("button_preview_manager", "main_state_option", "interactable_main_state_option_warning", "preview_type_option", "default_left_anim_position_property", "hover_left_anim_position_property", "default_right_anim_position_property", "hover_right_anim_position_property")]
 custom_minimum_size = Vector2(350, 0)
 anchors_preset = 3
 anchor_left = 1.0
@@ -679,6 +680,10 @@ button_preview_manager = NodePath("../../ButtonPreviewManager")
 main_state_option = NodePath("MarginContainer/VBoxContainer/State/OptionButton")
 interactable_main_state_option_warning = NodePath("MarginContainer/VBoxContainer/Interactable/Warning")
 preview_type_option = NodePath("MarginContainer/VBoxContainer/Type/OptionButton")
+default_left_anim_position_property = NodePath("MarginContainer/VBoxContainer/LeftAnimDefaultPosition/Vector2SpinBoxGroup")
+hover_left_anim_position_property = NodePath("MarginContainer/VBoxContainer/LeftAnimHoverPosition/Vector2SpinBoxGroup")
+default_right_anim_position_property = NodePath("MarginContainer/VBoxContainer/RightAnimDefaultPosition/Vector2SpinBoxGroup")
+hover_right_anim_position_property = NodePath("MarginContainer/VBoxContainer/RightAnimHoverPosition/Vector2SpinBoxGroup")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Display"]
 layout_mode = 2
@@ -836,52 +841,57 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition"]
+[node name="Vector2SpinBoxGroup" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition" node_paths=PackedStringArray("x_spin_box", "y_spin_box")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
+script = ExtResource("12_ufcu2")
+x_spin_box = NodePath("X/SpinBox")
+y_spin_box = NodePath("Y/SpinBox")
 
-[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer"]
+[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/Vector2SpinBoxGroup"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer/X"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/Vector2SpinBoxGroup/X"]
 layout_mode = 2
 size_flags_vertical = 5
 theme_type_variation = &"SpinBoxLabel"
 theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
 text = "X"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer/X"]
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/Vector2SpinBoxGroup/X"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -100.0
+min_value = -200.0
+max_value = 200.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 suffix = "px"
+select_all_on_focus = true
 
-[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer"]
+[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/Vector2SpinBoxGroup"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer/Y"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/Vector2SpinBoxGroup/Y"]
 layout_mode = 2
 size_flags_vertical = 5
 theme_type_variation = &"SpinBoxLabel"
 theme_override_colors/font_color = Color(0.506667, 1, 0.26, 1)
 text = "Y"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/HBoxContainer/Y"]
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/Vector2SpinBoxGroup/Y"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -100.0
+min_value = -200.0
+max_value = 200.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 suffix = "px"
+select_all_on_focus = true
 
 [node name="LeftAnimHoverPosition" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 21)
@@ -902,52 +912,57 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition"]
+[node name="Vector2SpinBoxGroup" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition" node_paths=PackedStringArray("x_spin_box", "y_spin_box")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
+script = ExtResource("12_ufcu2")
+x_spin_box = NodePath("X/SpinBox")
+y_spin_box = NodePath("Y/SpinBox")
 
-[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer"]
+[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/Vector2SpinBoxGroup"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer/X"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/Vector2SpinBoxGroup/X"]
 layout_mode = 2
 size_flags_vertical = 5
 theme_type_variation = &"SpinBoxLabel"
 theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
 text = "X"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer/X"]
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/Vector2SpinBoxGroup/X"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -100.0
+min_value = -200.0
+max_value = 200.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 suffix = "px"
+select_all_on_focus = true
 
-[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer"]
+[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/Vector2SpinBoxGroup"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer/Y"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/Vector2SpinBoxGroup/Y"]
 layout_mode = 2
 size_flags_vertical = 5
 theme_type_variation = &"SpinBoxLabel"
 theme_override_colors/font_color = Color(0.506667, 1, 0.26, 1)
 text = "Y"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/HBoxContainer/Y"]
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/Vector2SpinBoxGroup/Y"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -100.0
+min_value = -200.0
+max_value = 200.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 suffix = "px"
+select_all_on_focus = true
 
 [node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -978,52 +993,57 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition"]
+[node name="Vector2SpinBoxGroup" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition" node_paths=PackedStringArray("x_spin_box", "y_spin_box")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
+script = ExtResource("12_ufcu2")
+x_spin_box = NodePath("X/SpinBox")
+y_spin_box = NodePath("Y/SpinBox")
 
-[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer"]
+[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/Vector2SpinBoxGroup"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer/X"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/Vector2SpinBoxGroup/X"]
 layout_mode = 2
 size_flags_vertical = 5
 theme_type_variation = &"SpinBoxLabel"
 theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
 text = "X"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer/X"]
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/Vector2SpinBoxGroup/X"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -100.0
+min_value = -200.0
+max_value = 200.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 suffix = "px"
+select_all_on_focus = true
 
-[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer"]
+[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/Vector2SpinBoxGroup"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer/Y"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/Vector2SpinBoxGroup/Y"]
 layout_mode = 2
 size_flags_vertical = 5
 theme_type_variation = &"SpinBoxLabel"
 theme_override_colors/font_color = Color(0.506667, 1, 0.26, 1)
 text = "Y"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/HBoxContainer/Y"]
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/Vector2SpinBoxGroup/Y"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -100.0
+min_value = -200.0
+max_value = 200.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 suffix = "px"
+select_all_on_focus = true
 
 [node name="RightAnimHoverPosition" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 21)
@@ -1044,52 +1064,57 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition"]
+[node name="Vector2SpinBoxGroup" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition" node_paths=PackedStringArray("x_spin_box", "y_spin_box")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
+script = ExtResource("12_ufcu2")
+x_spin_box = NodePath("X/SpinBox")
+y_spin_box = NodePath("Y/SpinBox")
 
-[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer"]
+[node name="X" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/Vector2SpinBoxGroup"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer/X"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/Vector2SpinBoxGroup/X"]
 layout_mode = 2
 size_flags_vertical = 5
 theme_type_variation = &"SpinBoxLabel"
 theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
 text = "X"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer/X"]
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/Vector2SpinBoxGroup/X"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -100.0
+min_value = -200.0
+max_value = 200.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 suffix = "px"
+select_all_on_focus = true
 
-[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer"]
+[node name="Y" type="HBoxContainer" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/Vector2SpinBoxGroup"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer/Y"]
+[node name="Label" type="Label" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/Vector2SpinBoxGroup/Y"]
 layout_mode = 2
 size_flags_vertical = 5
 theme_type_variation = &"SpinBoxLabel"
 theme_override_colors/font_color = Color(0.506667, 1, 0.26, 1)
 text = "Y"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/HBoxContainer/Y"]
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/Vector2SpinBoxGroup/Y"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -100.0
+min_value = -200.0
+max_value = 200.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 suffix = "px"
+select_all_on_focus = true
 
 [node name="About" type="PanelContainer" parent="CanvasLayer"]
 visible = false
@@ -1215,3 +1240,7 @@ item_5/id = 5
 [connection signal="item_selected" from="CanvasLayer/Display/MarginContainer/VBoxContainer/State/OptionButton" to="CanvasLayer/Display" method="_on_main_state_changed"]
 [connection signal="toggled" from="CanvasLayer/Display/MarginContainer/VBoxContainer/Interactable/CheckBox" to="CanvasLayer/Display" method="_on_interactable_main_state_changed"]
 [connection signal="item_selected" from="CanvasLayer/Display/MarginContainer/VBoxContainer/Type/OptionButton" to="CanvasLayer/Display" method="_on_preview_type_changed"]
+[connection signal="value_changed" from="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimDefaultPosition/Vector2SpinBoxGroup" to="CanvasLayer/Display" method="_on_default_left_anim_pos_changed"]
+[connection signal="value_changed" from="CanvasLayer/Display/MarginContainer/VBoxContainer/LeftAnimHoverPosition/Vector2SpinBoxGroup" to="CanvasLayer/Display" method="_on_hover_left_anim_pos_changed"]
+[connection signal="value_changed" from="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimDefaultPosition/Vector2SpinBoxGroup" to="CanvasLayer/Display" method="_on_default_right_anim_pos_changed"]
+[connection signal="value_changed" from="CanvasLayer/Display/MarginContainer/VBoxContainer/RightAnimHoverPosition/Vector2SpinBoxGroup" to="CanvasLayer/Display" method="_on_hover_right_anim_pos_changed"]
